@@ -9,9 +9,6 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=73dd143ec7
       document
         .getElementById('btnGet')
         .addEventListener('click', app.fetchWeather);
-      document
-        .getElementById('btnCurrent')
-        .addEventListener('click', app.getLocation);
     },
     fetchWeather: (ev) => {
       let city = document.getElementById('city').ariaValueMax;
@@ -39,9 +36,34 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=73dd143ec7
             let dt = new Date(day.dt * 1000);
             let sr = new Date(dat.sunrise * 1000).toTimeString();
             let ss = new Date(day.sunset * 1000).toTimeString();
-            return `<div class="card">`
+            return `<div class="card">
+            <h5 class="card-title p-2">${dt.toDateString()}</h5>
+            <img
+                  src="http://openweathermap.org/img/wn/${
+                    day.weather[0].icon
+                  }@4x.png"
+                  class="card-img-top"
+                  alt="${day.weather[0].description}"
+                />
+                <div class="card-body">
+                  <h3 class="card-title">${day.weather[0].main}</h3>
+                  <p class="card-text">Current Temp: ${current.temp}</p>
+                  <p class="card-text">High Temp: ${day.temp.max}&deg;C Low Temp: ${
+                    day.temp.min
+                  }&deg;C</p>
+                  <p class="card-text">Wind: ${current.wind_speed}m/s, ${
+                    current.wind_deg
+                  }&deg;</p>
+                  <p class="card-text">Humidity: ${day.humidity}%</p>
+                  <p class="card-text">Rain: ${day.pop * 100}%</p>
+                  <p class="card-text">UV Index: ${day.uvi}</p>
+                  </div>
+              </div>
+            </div>
+          </div>`;
           }
         })
-    }
-
-  }
+        .join(' ');
+    },
+  };
+  app.init();
