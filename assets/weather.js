@@ -32,12 +32,18 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=london&appid=${apiKey}
       let lang = 'en';
       let units = 'imperial';
       let url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}&lang=${lang}`;
-      fetch(url)
+       const fetchReq1 = fetch(url)
         .then((resp) => {
           if (!resp.ok) throw new Error(resp.statusText);
           return resp.json();
         })
-        .then((data) => {
+        const fetchReq2 = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}&lang=${lang}`)
+        .then((resp) => {
+          if (!resp.ok) throw new Error(resp.statusText);
+          return resp.json();
+        })
+        const allData = Promise.all([fetchReq1, fetchReq2]);
+        allData.then((data) => {
           app.showWeather(data);
         })
         .catch(console.err);
@@ -48,22 +54,28 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=london&appid=${apiKey}
       let row = document.querySelector('.weather.row');
 
 //var for the weather data
- let temp = resp.main.temp
+ let temp = resp[1].main.temp
 console.log(temp)
-let highTemp = resp.main.temp_max
+let highTemp = resp[1].main.temp_max
 console.log(highTemp)
-let lowTemp = resp.main.temp_min
+let lowTemp = resp[1].main.temp_min
 console.log(lowTemp)
-let wind = resp.wind.speed
+let wind = resp[1].wind.speed
+let humidity =  resp[1].main.humidity
+console.log(humidity)
+let rain = resp[1].rain
+console.log(rain)
 
 //var for the element IDs
 const currentTemp = document.getElementById('current-temp');
 const highLowTemp = document.getElementById('high-low-temp');
-const windSpeed = document.getElementById('wind-speed')
+const windSpeed = document.getElementById('wind-speed');
+const currentHumidity = document.getElementById('current-humidity');
 
 currentTemp.innerHTML = "Current Temp: " + temp;
 highLowTemp.innerHTML = "High Temp: " + highTemp + " Low Temp: " + lowTemp
 windSpeed.innerHTML = "Wind: " + wind + " MPH"
+currentHumidity.innerHTML = "Humidity: " + humidity + "%"
       // row.innerHTML = 
   //     forecast.map((day, idx) => {
   //         if (idx <= 2) {
