@@ -63,19 +63,36 @@ console.log(lowTemp)
 let wind = resp[1].wind.speed
 let humidity =  resp[1].main.humidity
 console.log(humidity)
-let rain = resp[1].rain
+let rain = resp[1].weather.rain
 console.log(rain)
+let secondTemp = resp[0].list[5].main.temp
+console.log(secondTemp)
+let secondHigh = resp[0].list[5].main.temp_max
+let secondLow = resp[0].list[5].main.temp_min
+let secondWind = resp[0].list[5].wind.speed
+console.log("Hell yeah Billy Joel reference")
+let secondHumidity = resp[0].list[5].main.humidity
 
 //var for the element IDs
 const currentTemp = document.getElementById('current-temp');
 const highLowTemp = document.getElementById('high-low-temp');
 const windSpeed = document.getElementById('wind-speed');
 const currentHumidity = document.getElementById('current-humidity');
+const dayTwoTemp = document.getElementById('second-temp');
+const dayTwoHigh = document.getElementById('second-high-low');
+const dayTwoWind = document.getElementById('second-wind');
+const dayTwoHumidity = document.getElementById("second-humidity");
 
+//putting data on the page
 currentTemp.innerHTML = "Current Temp: " + temp;
-highLowTemp.innerHTML = "High Temp: " + highTemp + " Low Temp: " + lowTemp
-windSpeed.innerHTML = "Wind: " + wind + " MPH"
-currentHumidity.innerHTML = "Humidity: " + humidity + "%"
+highLowTemp.innerHTML = "High Temp: " + highTemp + " Low Temp: " + lowTemp;
+windSpeed.innerHTML = "Wind: " + wind + " MPH";
+currentHumidity.innerHTML = "Humidity: " + humidity + "%";
+dayTwoTemp.innerHTML = "Temp: " + secondTemp;
+dayTwoHigh.innerHTML = "High Temp: " + secondHigh + " Low Temp: " + secondLow;
+dayTwoWind.innerHTML = "Wind: " + secondWind + "MPH"
+dayTwoHumidity.innerHTML = "Humidity: " + secondHumidity + "%" 
+
       // row.innerHTML = 
   //     forecast.map((day, idx) => {
   //         if (idx <= 2) {
