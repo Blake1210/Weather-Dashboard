@@ -23,7 +23,7 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=london&cnt=3&appid=${a
     init: () => {
       document
         .getElementById('btnGet')
-        .addEventListener('click', app.fetchCurrentWeather);
+        .addEventListener('click', app.fetchCurrentWeather,);
       
     },
     fetchCurrentWeather: (ev) => {
@@ -47,12 +47,32 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=london&cnt=3&appid=${a
           app.showWeather(data);
         })
         .catch(console.err);
+        
+        // let cityData = [];
+        // function saveCityName(){
+        // let cityStringified = JSON.stringify(city);
+        //   cityData.push(cityStringified)
+        //   localStorage.setItem('data', city)
+
+        //   saveCityName()
+      // }
     },
 
     showWeather: (resp) => {
       console.log(resp);
+      console.log(resp[1].weather[0].icon)
       let row = document.querySelector('.weather.row');
-
+     let currentPic = document.getElementById('current-img');
+     currentPic.setAttribute("src",  "http:/openweathermap.org/img/wn/"+ resp[1].weather[0].icon +"@4x.png");
+     let dayTwoPic = document.getElementById('second-img');
+     dayTwoPic.setAttribute("src",  "http:/openweathermap.org/img/wn/"+ resp[0].list[5].weather[0].icon +"@4x.png");
+     let dayThreePic = document.getElementById('third-img');
+     dayThreePic.setAttribute("src",  "http:/openweathermap.org/img/wn/"+ resp[0].list[13].weather[0].icon +"@4x.png");
+     let dayFourPic = document.getElementById('fourth-img');
+     dayFourPic.setAttribute("src",  "http:/openweathermap.org/img/wn/"+ resp[0].list[21].weather[0].icon +"@4x.png");
+     let dayFivePic = document.getElementById('fifth-img');
+     dayFivePic.setAttribute("src",  "http:/openweathermap.org/img/wn/"+ resp[0].list[19].weather[0].icon +"@4x.png");
+      
 //var for the weather data
  let temp = resp[1].main.temp
 console.log(temp)
@@ -109,6 +129,7 @@ const dayFiveWind = document.getElementById('fifth-wind');
 const dayFiveHumidity = document.getElementById('fifth-humidity');
 
 
+
 //putting data on the page
 currentTemp.innerHTML = "Current Temp: " + temp;
 highLowTemp.innerHTML = "High Temp: " + highTemp + " Low Temp: " + lowTemp;
@@ -127,7 +148,7 @@ dayFourHigh.innerHTML = "High Temp: " + fourthHigh + " Low Temp: " + fourthLow;
 dayFourWind.innerHTML = "Wind: " + fourthWind + "MPH"
 dayFourHumidity.innerHTML = "Humidity: " + fourthHumidity + "%"
 dayFiveTemp.innerHTML = "Temp: " + fifthTemp;
-dayFiveHigh.innerHTML = "High Temp: " + fifthHigh + " Low Temp: " + fourthLow;
+dayFiveHigh.innerHTML = "High Temp: " + fifthHigh + " Low Temp: " + fifthLow;
 dayFiveWind.innerHTML = "Wind: " + fifthWind + "MPH"
 dayFiveHumidity.innerHTML = "Humidity: " + fifthHumidity + "%"
 
