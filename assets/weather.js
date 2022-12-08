@@ -1,24 +1,33 @@
 var apiKey = "b711981b9768551b14c4803eeb3cca40"
 
+// dates
+const today = new Date()
+
+  let mm = today.getMonth() + 1;
+   let dd = today.getDate();
+   let tomorrow = today.getDate() +1;
+   let dayThree = today.getDate() +2;
+   let dayFour = today.getDate() +3;
+   let dayFive = today.getDate() +4;
+
+   const formattedToday = mm + '/' + dd;  
+   const formattedTomorrow = mm + '/' + tomorrow;
+   const formattedThree = mm + '/' + dayThree;
+   const formattedFour = mm + '/' + dayFour;
+   const formattedFive = mm + '/' + dayFive
+  
+  document.getElementById('current-date').innerHTML = "Date " + formattedToday
+  document.getElementById('day-two').innerHTML = "Date " + formattedTomorrow
+  document.getElementById('day-three').innerHTML = "Date " + formattedThree
+  document.getElementById('day-four').innerHTML = "Date " + formattedFour
+  document.getElementById('day-five').innerHTML = "Date " + formattedFive
+
+// test fetch
 fetch(`https://api.openweathermap.org/data/2.5/forecast?q=london&cnt=3&appid=${apiKey}`)
   .then((response) => response.json())
   .then((data) => console.log(data));
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-// function renderHelper(city, data) {
-//   app.fetchWeather(city)
-// }
-// function fetchFive(location) {
-//   var {lat} = location;
-//   var {lon} = location;
-//   var cityName = location.name
-//   var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-//   fetch(apiUrl)
-//   .then(x => x.json())
-//   .then(data => {
-//     // app.fetchWeather(cityName),
-//     console.log(app.fetchWeather(cityName), data)
-//   })
-// }
+
+// search function and puts results on page
   const app = {
     init: () => {
       document
@@ -152,42 +161,7 @@ dayFiveHigh.innerHTML = "High Temp: " + fifthHigh + " Low Temp: " + fifthLow;
 dayFiveWind.innerHTML = "Wind: " + fifthWind + "MPH"
 dayFiveHumidity.innerHTML = "Humidity: " + fifthHumidity + "%"
 
-//learn how to push into arrays
 
-      // row.innerHTML = 
-  //     forecast.map((day, idx) => {
-  //         if (idx <= 2) {
-  //           let dt = new Date(day.dt * 1000);
-  //           let sr = new Date(dat.sunrise * 1000).toTimeString();
-  //           let ss = new Date(day.sunset * 1000).toTimeString();
-  //           return `<div class="card">
-  //           <h5 class="card-title p-2">${dt.toDateString()}</h5>
-  //           <img
-  //                 src="http://openweathermap.org/img/wn/${
-  //                   day.weather[0].icon
-  //                 }@4x.png"
-  //                 class="card-img-top"
-  //                 alt="${day.weather[0].description}"
-  //               />
-  //               <div class="card-body">
-  //                 <h3 class="card-title">${day.weather[0].main}</h3>
-  //                 <p class="card-text">Current Temp: ${current.temp}</p>
-  //                 <p class="card-text">High Temp: ${day.temp.max}&deg;C Low Temp: ${
-  //                   day.temp.min
-  //                 }&deg;C</p>
-  //                 <p class="card-text">Wind: ${current.wind_speed}m/s, ${
-  //                   current.wind_deg
-  //                 }&deg;</p>
-  //                 <p class="card-text">Humidity: ${day.humidity}%</p>
-  //                 <p class="card-text">Rain: ${day.pop * 100}%</p>
-  //                 <p class="card-text">UV Index: ${day.uvi}</p>
-  //                 </div>
-  //             </div>
-  //           </div>
-  //         </div>`;
-  //         }
-  //       })
-  //       .join(' ');
     },
    }
    app.init();
